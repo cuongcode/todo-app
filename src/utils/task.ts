@@ -5,4 +5,5 @@ export interface Task {
     description: string,
     tags: Tag[],
     status: string,
+    priority: number,
 }
