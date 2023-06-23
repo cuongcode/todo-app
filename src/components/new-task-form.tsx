@@ -14,6 +14,7 @@ export const NewTaskForm = ({
   const [title, setTitle] = useState<any>("");
   const [description, setDescription] = useState<any>("");
   const [errors, setErrors] = useState<any>({});
+  const { v4: uuidv4 } = require('uuid')
 
   const _validate = () => {
     const newErrors: any = {};
@@ -32,6 +33,7 @@ export const NewTaskForm = ({
       return;
     }
     const body = {
+      id: uuidv4(),
       title: title,
       description: description,
       tags: [],

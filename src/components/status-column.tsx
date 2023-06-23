@@ -30,7 +30,7 @@ export const StatusColumn = ({ status, data }: { status: string; data: any }) =>
 
       <div className="flex flex-col space-y-3">
         {data.map((item: any) => (
-          <div key={item.title}>
+          <div key={item.id}>
             <TaskCard task={item} isShowSelectBoxes={isShowSelectBoxes} />
           </div>
         ))}
