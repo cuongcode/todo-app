@@ -15,9 +15,9 @@ const {todoData, inProgressData, completedData} = useContext(DataContext)
         </div>
 
         <div className="flex flex-col h-full space-y-5 md:flex-row md:space-x-5 md:space-y-0">
-          <StatusColumn status="To do" data={todoData}></StatusColumn>
-          <StatusColumn status="In progress" data={inProgressData}></StatusColumn>
-          <StatusColumn status="Completed" data={completedData}></StatusColumn>
+          <StatusColumn status="to-do" data={todoData}></StatusColumn>
+          <StatusColumn status="in-progress" data={inProgressData}></StatusColumn>
+          <StatusColumn status="completed" data={completedData}></StatusColumn>
         </div>
       </div>
     </div>
