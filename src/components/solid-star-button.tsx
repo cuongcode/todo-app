@@ -1,7 +1,7 @@
-export const SolidStarButton = () => {
+export const SolidStarButton = ({onUnpin}:{onUnpin:any}) => {
   return (
     <>
-      <button>
+      <button type="button" onClick={onUnpin}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

@@ -1,7 +1,7 @@
-export const OutlineStarButton = () => {
+export const OutlineStarButton = ({ onPin }: { onPin: any }) => {
   return (
     <>
-      <button>
+      <button type="button" onClick={onPin}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

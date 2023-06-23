@@ -1,4 +1,5 @@
-export * from './pencil-edit-button'
+export * from './pencil-task-edit-button'
+export * from './pencil-multi-edit-button'
 export * from './add-task-button'
 export * from './select-button'
 export * from './outline-star-button'
