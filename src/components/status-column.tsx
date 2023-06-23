@@ -4,6 +4,7 @@ import { PencilMultiEditButton, AddTaskButton, TaskCard } from "./index";
 
 export const StatusColumn = ({ status, data }: { status: any; data: any }) => {
   const [isShowSelectBoxes, setisShowSelectBoxes] = useState(false);
+  const [isAddTask, setIsAddTask] = useState(false)
 
   const _onShowSelectBox = () => {
     setisShowSelectBoxes(!isShowSelectBoxes);
