@@ -5,6 +5,7 @@ const housework = {name: 'housework', color: 'blue'}
 
 export const STATIC_DATA = [
     {
+        id: 4546,
         title: 'upper body',
         description: '20 reps push up, 10 reps pull up',
         tags: [workout],
@@ -12,6 +13,7 @@ export const STATIC_DATA = [
         priority: 0,
     },
     {
+        id: 12456,
         title: 'to do app project',
         description: 'add components',
         tags: [code, learn],
@@ -19,6 +21,7 @@ export const STATIC_DATA = [
         priority: 0,
     },
     {
+        id: 78953,
         title: 'clean room',
         description: 'clean all rooms on second floor',
         tags: [housework],
@@ -26,6 +29,7 @@ export const STATIC_DATA = [
         priority: 1,
     },
     {
+        id: 45621,
         title: 'feed the cat',
         description: 'buy new food for cat',
         tags: [housework],

@@ -13,12 +13,23 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
   const onAddTask = (task: any) => {
     setData((prev: any) => [task,...prev]);
   };
+  
+  const onChangeStatus = (task:any, newStatus:any) => {
+    const newTask = {...task, status: newStatus, priority: 0}
+    setData((prev: any) => prev.map((item:any)=>{
+      if (item.id === newTask.id) {
+        return newTask
+      }
+      return item
+    }));
+  };
 
   const context = {
     todoData,
     inProgressData,
     completedData,
     onAddTask,
+    onChangeStatus,
   };
 
   return (

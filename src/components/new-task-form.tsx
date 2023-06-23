@@ -11,7 +11,6 @@ export const NewTaskForm = ({
   onCancel: any;
 }) => {
   const { onAddTask } = useContext(DataContext);
-  // const [form, setForm] = useState<any>({});
   const [title, setTitle] = useState<any>("");
   const [description, setDescription] = useState<any>("");
   const [errors, setErrors] = useState<any>({});
