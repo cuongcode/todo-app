@@ -10,6 +10,7 @@ export const STATIC_DATA = [
         description: '20 reps push up, 10 reps pull up',
         tags: [workout],
         status: 'to-do',
+        isPinned: true,
         priority: 0,
     },
     {
@@ -18,6 +19,7 @@ export const STATIC_DATA = [
         description: 'add components',
         tags: [code, learn],
         status: 'in-progress',
+        isPinned: true,
         priority: 0,
     },
     {
@@ -26,6 +28,7 @@ export const STATIC_DATA = [
         description: 'clean all rooms on second floor',
         tags: [housework],
         status: 'to-do',
+        isPinned: false,
         priority: 1,
     },
     {
@@ -34,6 +37,34 @@ export const STATIC_DATA = [
         description: 'buy new food for cat',
         tags: [housework],
         status: 'completed',
+        isPinned: false,
+        priority: 0,
+    },
+    {
+        id: 1572,
+        title: 'dish washing',
+        description: '',
+        tags: [housework],
+        status: 'completed',
+        isPinned: true,
+        priority: 0,
+    },
+    {
+        id: 75652,
+        title: 'read book',
+        description: '10 pages',
+        tags: [learn],
+        status: 'to-do',
+        isPinned: false,
+        priority: 0,
+    },
+    {
+        id: 731583,
+        title: 'run',
+        description: '5km',
+        tags: [workout],
+        status: 'to-do',
+        isPinned: true,
         priority: 0,
     },
 

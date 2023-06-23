@@ -42,6 +42,18 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const onPinUnpin = (task: any) => {
+    const updatedTask = { ...task, isPinned: !task.isPinned};
+    setData((prev: any) =>
+      prev.map((item: any) => {
+        if (item.id === updatedTask.id) {
+          return updatedTask;
+        }
+        return item;
+      })
+    );
+  };
+
   const context = {
     todoData,
     inProgressData,
@@ -49,6 +61,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     onAddTask,
     onChangeStatus,
     onEditTask,
+    onPinUnpin,
   };
 
   return (

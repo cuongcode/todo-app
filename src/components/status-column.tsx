@@ -9,7 +9,9 @@ export const StatusColumn = ({ status, data }: { status: string; data: any }) =>
     completed: "Completed",
   };
   const [isShowSelectBoxes, setisShowSelectBoxes] = useState(false);
-  const [isAddTask, setIsAddTask] = useState(false);
+
+  const pinData = data.filter((item:any) => item.isPinned === true)
+  const unpinData = data.filter((item:any) => item.isPinned === false)
 
   const _onShowSelectBox = () => {
     setisShowSelectBoxes(!isShowSelectBoxes);
@@ -29,7 +31,12 @@ export const StatusColumn = ({ status, data }: { status: string; data: any }) =>
       <AddTaskButton status={status} />
 
       <div className="flex flex-col space-y-3">
-        {data.map((item: any) => (
+        {pinData.map((item: any) => (
+          <div key={item.id}>
+            <TaskCard task={item} isShowSelectBoxes={isShowSelectBoxes} />
+          </div>
+        ))}
+        {unpinData.map((item: any) => (
           <div key={item.id}>
             <TaskCard task={item} isShowSelectBoxes={isShowSelectBoxes} />
           </div>

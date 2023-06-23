@@ -19,10 +19,10 @@ export const TaskCard = ({
   task: any;
   isShowSelectBoxes: any;
 }) => {
-  const { onEditTask } = useContext(DataContext);
+  const { onEditTask, onPinUnpin } = useContext(DataContext);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
-  const [isPinned, setIsPinned] = useState(false);
+  // const [isPinned, setIsPinned] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
@@ -30,12 +30,8 @@ export const TaskCard = ({
     setIsSelected(!isSelected);
   };
 
-  const _onUnpin = () => {
-    setIsPinned(false);
-  };
-
-  const _onPin = () => {
-    setIsPinned(true);
+  const _onPinUnpin = () => {
+    onPinUnpin(task)
   };
 
   const _onEdit = () => {
@@ -62,10 +58,10 @@ export const TaskCard = ({
               <SelectButton isSelected={isSelected} onSelect={_onSelect} />
             ) : null}
 
-            {isPinned ? (
-              <SolidStarButton onUnpin={_onUnpin} />
+            {task.isPinned ? (
+              <SolidStarButton onUnpin={_onPinUnpin} />
             ) : (
-              <OutlineStarButton onPin={_onPin} />
+              <OutlineStarButton onPin={_onPinUnpin} />
             )}
 
             {isEdit ? (
