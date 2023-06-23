@@ -10,18 +10,36 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
   const inProgressData = data.filter((item) => item.status === "in-progress");
   const completedData = data.filter((item) => item.status === "completed");
 
-  const onAddTask = (task: any) => {
-    setData((prev: any) => [task,...prev]);
+  const onAddTask = (newTask: any) => {
+    setData((prev: any) => [newTask, ...prev]);
   };
-  
-  const onChangeStatus = (task:any, newStatus:any) => {
-    const newTask = {...task, status: newStatus, priority: 0}
-    setData((prev: any) => prev.map((item:any)=>{
-      if (item.id === newTask.id) {
-        return newTask
-      }
-      return item
-    }));
+
+  const onChangeStatus = (task: any, newStatus: any) => {
+    const updatedTask = { ...task, status: newStatus, priority: 0 };
+    setData((prev: any) =>
+      prev.map((item: any) => {
+        if (item.id === updatedTask.id) {
+          return updatedTask;
+        }
+        return item;
+      })
+    );
+  };
+
+  const onEditTask = (task:any, newTitle:any, newDescription:any) => {
+    const updatedTask = {
+      ...task,
+      title: newTitle,
+      description: newDescription,
+    };
+    setData((prev: any) =>
+      prev.map((item: any) => {
+        if (item.id === updatedTask.id) {
+          return updatedTask;
+        }
+        return item;
+      })
+    );
   };
 
   const context = {
@@ -30,6 +48,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     completedData,
     onAddTask,
     onChangeStatus,
+    onEditTask,
   };
 
   return (
