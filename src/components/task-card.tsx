@@ -15,16 +15,22 @@ import { DataContext } from "../utils/data-context";
 export const TaskCard = ({
   task,
   isShowSelectBoxes,
+  selfIndex,
+  sourceData,
 }: {
   task: any;
   isShowSelectBoxes: any;
+  selfIndex: any;
+  sourceData:any
 }) => {
-  const { onEditTask, onPinUnpin } = useContext(DataContext);
+  const { onEditTask, onPinUnpin, onSwitchTaskPosition } = useContext(DataContext);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
-  // const [isPinned, setIsPinned] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+
+  const upperTask = sourceData[selfIndex-1]
+  const lowerTask = sourceData[selfIndex+1]
 
   const _onSelect = () => {
     setIsSelected(!isSelected);
@@ -48,6 +54,22 @@ export const TaskCard = ({
     onEditTask(task, title, description)
     _onCancelEdit()
   };
+
+  const _onMoveUp = () => {
+    if (task.isPinned === false && selfIndex === 0) {
+      _onPinUnpin()
+      return
+    }
+    onSwitchTaskPosition(task, upperTask)
+  }
+
+  const _onMoveDown = () => {
+    if (task.isPinned === true && selfIndex === sourceData.length-1) {
+      _onPinUnpin()
+      return
+    }
+    onSwitchTaskPosition(task, lowerTask)
+  }
 
   return (
     <>
@@ -80,8 +102,8 @@ export const TaskCard = ({
             {isEdit ? null : <PencilTaskEditButton onEdit={_onEdit} />}
           </div>
           <div className="flex flex-col">
-            <ChevronUpButton />
-            <ChevronDownButton />
+            {selfIndex === 0 && task.isPinned === true ? null : <ChevronUpButton onButtonClick={_onMoveUp}/>}
+            {selfIndex === sourceData.length-1 && task.isPinned === false ? null : <ChevronDownButton onButtonClick={_onMoveDown}/>}
           </div>
         </div>
         {isEdit ? (

@@ -44,14 +44,23 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
 
   const onPinUnpin = (task: any) => {
     const updatedTask = { ...task, isPinned: !task.isPinned};
-    setData((prev: any) =>
-      prev.map((item: any) => {
-        if (item.id === updatedTask.id) {
-          return updatedTask;
-        }
-        return item;
-      })
-    );
+    const taskIndex = data.findIndex((item:any) => item.id === updatedTask.id)
+    const newData = [...data]
+    newData.splice(taskIndex,1)
+    newData.splice(0,0,updatedTask)
+    setData(newData)
+  };
+  
+  const onSwitchTaskPosition = (task1:any, task2:any) => {
+    setData((prev:any)=>data.map((item:any) => {
+      if (item.id === task1.id) {
+        return task2
+      }
+      if (item.id === task2.id) {
+        return task1
+      }
+      return item
+    }))
   };
 
   const context = {
@@ -62,6 +71,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     onChangeStatus,
     onEditTask,
     onPinUnpin,
+    onSwitchTaskPosition,
   };
 
   return (

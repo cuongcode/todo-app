@@ -31,14 +31,14 @@ export const StatusColumn = ({ status, data }: { status: string; data: any }) =>
       <AddTaskButton status={status} />
 
       <div className="flex flex-col space-y-3">
-        {pinData.map((item: any) => (
+        {pinData.map((item: any, index: any) => (
           <div key={item.id}>
-            <TaskCard task={item} isShowSelectBoxes={isShowSelectBoxes} />
+            <TaskCard task={item} isShowSelectBoxes={isShowSelectBoxes} selfIndex={index} sourceData={pinData}/>
           </div>
         ))}
-        {unpinData.map((item: any) => (
+        {unpinData.map((item: any, index: any) => (
           <div key={item.id}>
-            <TaskCard task={item} isShowSelectBoxes={isShowSelectBoxes} />
+            <TaskCard task={item} isShowSelectBoxes={isShowSelectBoxes} selfIndex={index} sourceData={unpinData}/>
           </div>
         ))}
       </div>
