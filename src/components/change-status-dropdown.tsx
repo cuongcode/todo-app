@@ -20,7 +20,7 @@ export const ChangeStatusDropdown = ({ task }: { task: any }) => {
         {task.status}
       </button>
       {isDropdown ? (
-        <div className="absolute top-7 flex flex-col bg-[#e9f2f1] w-fit text-xs text-gray-400 py-1 px-2 rounded-md">
+        <div className="z-10 absolute top-7 flex flex-col bg-[#e9f2f1] w-fit text-xs text-gray-400 py-1 px-2 rounded-md">
           {SELECTIONS.map((item: any) => {
             if (item !== task.status) {
               return (
