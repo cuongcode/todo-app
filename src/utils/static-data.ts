@@ -17,7 +17,7 @@ export const STATIC_DATA = [
         id: 12456,
         title: 'to do app project',
         description: 'add components',
-        tags: [code, learn],
+        tags: [code, learn, housework],
         status: 'in-progress',
         isPinned: true,
         priority: 0,

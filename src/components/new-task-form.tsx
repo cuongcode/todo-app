@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { TagButton } from "./index";
+import { TagDropdown } from "./index";
 import { DataContext } from "../utils/data-context";
 
 export const NewTaskForm = ({
@@ -74,7 +74,7 @@ export const NewTaskForm = ({
         </div>
 
         <div className="flex space-x-1">
-          <TagButton />
+          <TagDropdown/>
         </div>
         <div className="flex space-x-2">
           <button
