@@ -4,19 +4,19 @@ import { STATIC_DATA } from "./static-data";
 export const DataContext = createContext<any>([]);
 
 export const DataContextProvider = ({ children }: { children: ReactNode }) => {
-  const [data, setData] = useState(STATIC_DATA);
+  const [allTask, setAllTask] = useState(STATIC_DATA);
 
-  const todoData = data.filter((item) => item.status === "to-do");
-  const inProgressData = data.filter((item) => item.status === "in-progress");
-  const completedData = data.filter((item) => item.status === "completed");
+  const todoTask = allTask.filter((item) => item.status === "to-do");
+  const inProgressTask = allTask.filter((item) => item.status === "in-progress");
+  const completedTask = allTask.filter((item) => item.status === "completed");
 
   const onAddTask = (newTask: any) => {
-    setData((prev: any) => [newTask, ...prev]);
+    setAllTask((prev: any) => [newTask, ...prev]);
   };
 
   const onChangeStatus = (task: any, newStatus: any) => {
     const updatedTask = { ...task, status: newStatus };
-    setData((prev: any) =>
+    setAllTask((prev: any) =>
       prev.map((item: any) => {
         if (item.id === updatedTask.id) {
           return updatedTask;
@@ -32,7 +32,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
       title: newTitle,
       description: newDescription,
     };
-    setData((prev: any) =>
+    setAllTask((prev: any) =>
       prev.map((item: any) => {
         if (item.id === updatedTask.id) {
           return updatedTask;
@@ -44,15 +44,15 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
 
   const onPinUnpin = (task: any) => {
     const updatedTask = { ...task, isPinned: !task.isPinned};
-    const taskIndex = data.findIndex((item:any) => item.id === updatedTask.id)
-    const newData = [...data]
+    const taskIndex = allTask.findIndex((item:any) => item.id === updatedTask.id)
+    const newData = [...allTask]
     newData.splice(taskIndex,1)
     newData.splice(0,0,updatedTask)
-    setData(newData)
+    setAllTask(newData)
   };
   
   const onSwitchTaskPosition = (task1:any, task2:any) => {
-    setData((prev:any)=>data.map((item:any) => {
+    setAllTask((prev:any)=>allTask.map((item:any) => {
       if (item.id === task1.id) {
         return task2
       }
@@ -64,9 +64,9 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const context = {
-    todoData,
-    inProgressData,
-    completedData,
+    todoTask: todoTask,
+    inProgressTask: inProgressTask,
+    completedTask: completedTask,
     onAddTask,
     onChangeStatus,
     onEditTask,

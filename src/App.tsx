@@ -5,7 +5,7 @@ import { StatusColumn } from "./components/index";
 import { DataContext } from "./utils/data-context";
 
 function App() {
-const {todoData, inProgressData, completedData} = useContext(DataContext)
+const {todoTask, inProgressTask, completedTask} = useContext(DataContext)
   
   return (
     <div className="flex min-h-screen p-20 bg-gradient-to-br from-[#f5f9f9] to-[#309a87] ...">
@@ -15,9 +15,9 @@ const {todoData, inProgressData, completedData} = useContext(DataContext)
         </div>
 
         <div className="flex flex-col h-full space-y-5 md:flex-row md:space-x-5 md:space-y-0">
-          <StatusColumn status="to-do" data={todoData}></StatusColumn>
-          <StatusColumn status="in-progress" data={inProgressData}></StatusColumn>
-          <StatusColumn status="completed" data={completedData}></StatusColumn>
+          <StatusColumn status="to-do" data={todoTask}></StatusColumn>
+          <StatusColumn status="in-progress" data={inProgressTask}></StatusColumn>
+          <StatusColumn status="completed" data={completedTask}></StatusColumn>
         </div>
       </div>
     </div>
