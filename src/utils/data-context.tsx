@@ -89,6 +89,21 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const onUntag = (task:any, tag:any) => {
+    const tagIndex = task.tags.findIndex((item:any)=> item.id === tag.id)
+    const updatedTags = [...task.tags]
+    updatedTags.splice(tagIndex,1)
+    const updatedTask = {...task, tags: updatedTags}
+    setAllTask((prev: any) =>
+      prev.map((item: any) => {
+        if (item.id === updatedTask.id) {
+          return updatedTask;
+        }
+        return item;
+      })
+    );
+  }
+
   const context = {
     todoTask: todoTask,
     inProgressTask: inProgressTask,
@@ -101,6 +116,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     onSwitchTaskPosition,
     onAddTag,
     onTag,
+    onUntag,
   };
 
   return (
