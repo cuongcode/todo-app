@@ -38,7 +38,7 @@ export const NewTaskForm = ({
       description: description,
       tags: [],
       status: status,
-      priority: 0,
+      isPinned: true,
     };
     onAddTask(body);
     setTitle("");

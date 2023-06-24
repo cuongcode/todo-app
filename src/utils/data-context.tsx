@@ -15,7 +15,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const onChangeStatus = (task: any, newStatus: any) => {
-    const updatedTask = { ...task, status: newStatus, priority: 0 };
+    const updatedTask = { ...task, status: newStatus };
     setData((prev: any) =>
       prev.map((item: any) => {
         if (item.id === updatedTask.id) {

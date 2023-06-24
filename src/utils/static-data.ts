@@ -11,7 +11,6 @@ export const STATIC_DATA = [
         tags: [workout],
         status: 'to-do',
         isPinned: true,
-        priority: 0,
     },
     {
         id: 12456,
@@ -20,7 +19,6 @@ export const STATIC_DATA = [
         tags: [code, learn, housework],
         status: 'in-progress',
         isPinned: true,
-        priority: 0,
     },
     {
         id: 78953,
@@ -29,7 +27,6 @@ export const STATIC_DATA = [
         tags: [housework],
         status: 'to-do',
         isPinned: false,
-        priority: 1,
     },
     {
         id: 45621,
@@ -38,7 +35,6 @@ export const STATIC_DATA = [
         tags: [housework],
         status: 'completed',
         isPinned: false,
-        priority: 0,
     },
     {
         id: 1572,
@@ -47,7 +43,6 @@ export const STATIC_DATA = [
         tags: [housework],
         status: 'completed',
         isPinned: true,
-        priority: 0,
     },
     {
         id: 75652,
@@ -56,7 +51,6 @@ export const STATIC_DATA = [
         tags: [learn],
         status: 'to-do',
         isPinned: false,
-        priority: 0,
     },
     {
         id: 731583,
@@ -65,7 +59,6 @@ export const STATIC_DATA = [
         tags: [workout],
         status: 'to-do',
         isPinned: true,
-        priority: 0,
     },
 
 ]
