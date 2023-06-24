@@ -1,11 +1,11 @@
 import { ReactNode, createContext, useState } from "react";
-import { STATIC_DATA } from "./static-data";
+import { STATIC_TASK_DATA, STATIC_TAG_DATA } from "./index";
 
 export const DataContext = createContext<any>([]);
 
 export const DataContextProvider = ({ children }: { children: ReactNode }) => {
-  const [allTask, setAllTask] = useState<any>([]);
-  const [allTag, setAllTag] = useState<any>([])
+  const [allTask, setAllTask] = useState<any>(STATIC_TASK_DATA);
+  const [allTag, setAllTag] = useState<any>(STATIC_TAG_DATA)
 
   const todoTask = allTask.filter((item:any) => item.status === "to-do");
   const inProgressTask = allTask.filter((item:any) => item.status === "in-progress");
@@ -68,6 +68,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     todoTask: todoTask,
     inProgressTask: inProgressTask,
     completedTask: completedTask,
+    allTag,
     onAddTask,
     onChangeStatus,
     onEditTask,

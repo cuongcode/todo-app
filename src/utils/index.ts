@@ -1,3 +1,5 @@
 export * from './task'
 export * from './tag'
 export * from './tag-color'
+export * from './static-task-data'
+export * from './static-tag-data'
