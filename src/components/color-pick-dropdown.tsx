@@ -2,10 +2,9 @@ import { useState } from "react";
 
 import { TAG_COLOR } from "../utils/tag-color";
 
-export const ColorPickDropDown = () => {
+export const ColorPickDropDown = ({color, setColor}:{color:any, setColor:any}) => {
   const [isDropDown, setIsDropDown] = useState(false);
-  const [color, setColor] = useState("teal-200");
-
+  
   return (
     <div className="w-full relative flex">
       <button
@@ -20,6 +19,7 @@ export const ColorPickDropDown = () => {
               <button
                 className={`bg-${item} w-5 h-5 rounded-md`}
                 key={item}
+                onClick={()=>setColor(item)}
               ></button>
             ))}
           </div>

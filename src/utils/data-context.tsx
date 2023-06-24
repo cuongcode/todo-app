@@ -64,6 +64,10 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     }))
   };
 
+  const onAddTag = (newTag:any) => {
+    setAllTag((prev:any) => [...prev, newTag])
+  }
+
   const context = {
     todoTask: todoTask,
     inProgressTask: inProgressTask,
@@ -74,6 +78,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     onEditTask,
     onPinUnpin,
     onSwitchTaskPosition,
+    onAddTag,
   };
 
   return (
