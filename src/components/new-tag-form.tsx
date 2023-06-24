@@ -4,11 +4,17 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { ColorPickDropDown } from "./index";
 import { DataContext } from "../utils/data-context";
 
-export const NewTagForm = () => {
-  const { allTag, onAddTag } = useContext(DataContext);
+export const NewTagForm = ({task, onCloseDropdown}:{task:any, onCloseDropdown:any}) => {
+  const { allTag, onAddTag, onTag } = useContext(DataContext);
   const [tagName, setTagName] = useState("");
   const [tagColor, setTagColor] = useState("teal-200");
   const { v4: uuidv4 } = require("uuid");
+
+  const body = {
+    id: uuidv4(),
+    name: tagName,
+    color: tagColor,
+  };
 
   const _onAddTag = () => {
     if (tagName === "") {
@@ -19,14 +25,20 @@ export const NewTagForm = () => {
         return;
       }
     }
-    const body = {
-      id: uuidv4(),
-      name: tagName,
-      color: tagColor,
-    };
     onAddTag(body);
+    _onTag(body)
     setTagName("");
+    onCloseDropdown(false)
   };
+
+  const _onTag = (tag:any) => {
+    for (const item of task.tags) {
+      if(item.id === tag.id) {
+        return
+      }
+    }
+    onTag(task, tag)
+  }
 
   return (
     <div className="flex space-x-2">

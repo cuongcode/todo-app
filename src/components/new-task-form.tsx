@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { TagDropdown } from "./index";
+import { TagDropdown, TagSection } from "./index";
 import { DataContext } from "../utils/data-context";
 
 export const NewTaskForm = ({
@@ -15,6 +15,15 @@ export const NewTaskForm = ({
   const [description, setDescription] = useState<any>("");
   const [errors, setErrors] = useState<any>({});
   const { v4: uuidv4 } = require('uuid')
+
+  const body = {
+    id: uuidv4(),
+    title: title,
+    description: description,
+    tags: [],
+    status: status,
+    isPinned: true,
+  };
 
   const _validate = () => {
     const newErrors: any = {};
@@ -32,14 +41,7 @@ export const NewTaskForm = ({
     if (!_validate()) {
       return;
     }
-    const body = {
-      id: uuidv4(),
-      title: title,
-      description: description,
-      tags: [],
-      status: status,
-      isPinned: true,
-    };
+    
     onAddTask(body);
     setTitle("");
     setDescription("");
@@ -73,9 +75,6 @@ export const NewTaskForm = ({
           />
         </div>
 
-        <div className="flex space-x-1">
-          <TagDropdown/>
-        </div>
         <div className="flex space-x-2">
           <button
             onClick={onCancel}
