@@ -3,10 +3,13 @@ import { TagDropdown, Tag } from "./index";
 import { DataContext } from "../utils/data-context";
 
 export const TagSection = ({ task }: { task: any }) => {
-  const { onUntag } = useContext(DataContext);
+  const { onUntag, usedTags, onDeleteTag } = useContext(DataContext);
 
   const _onUntag = (tag: any) => {
     onUntag(task, tag);
+    if (usedTags.filter((item:any)=>item.id===tag.id).length === 1) {
+      onDeleteTag(tag)
+    }
   };
 
   return (

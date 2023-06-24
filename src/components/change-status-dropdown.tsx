@@ -25,6 +25,7 @@ export const ChangeStatusDropdown = ({ task }: { task: any }) => {
             if (item !== task.status) {
               return (
                 <button
+                  key={item}
                   onClick={() => _onChangeStatus(item)}
                   className="text-start hover:text-[#309a87]"
                 >
