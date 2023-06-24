@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 
 import {
-  SelectButton,
+  SelectBox,
   OutlineStarButton,
   SolidStarButton,
   PencilTaskEditButton,
@@ -11,6 +11,7 @@ import {
   TagSection,
 } from "./index";
 import { DataContext } from "../utils/data-context";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 export const TaskCard = ({
   task,
@@ -23,17 +24,16 @@ export const TaskCard = ({
   selfIndex: any;
   sourceData:any
 }) => {
-  const {usedTags, onEditTask, onPinUnpin, onSwitchTaskPosition, onDeleteTask, onDeleteTag } = useContext(DataContext);
+  const {usedTags, onEditTask, onPinUnpin, onSwitchTaskPosition, onDeleteTask, onDeleteTag, onSelect } = useContext(DataContext);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
-  const [isSelected, setIsSelected] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
   const upperTask = sourceData[selfIndex-1]
   const lowerTask = sourceData[selfIndex+1]
 
   const _onSelect = () => {
-    setIsSelected(!isSelected);
+    onSelect(task)
   };
 
   const _onPinUnpin = () => {
@@ -88,10 +88,8 @@ export const TaskCard = ({
         <div className="flex justify-between items-center text-base">
           <div className="flex items-center space-x-1">
             {isShowSelectBoxes ? (
-              <SelectButton isSelected={isSelected} onSelect={_onSelect} />
-            ) : null}
-
-            {task.isPinned ? (
+              <SelectBox isSelected={task.isSelected} onSelect={_onSelect} />
+            ) : task.isPinned ? (
               <SolidStarButton onUnpin={_onPinUnpin} />
             ) : (
               <OutlineStarButton onPin={_onPinUnpin} />
@@ -113,8 +111,13 @@ export const TaskCard = ({
             {isEdit ? null : <PencilTaskEditButton onEdit={_onEdit} />}
           </div>
           <div className="flex flex-col">
-            {selfIndex === 0 && task.isPinned === true ? null : <ChevronUpButton onButtonClick={_onMoveUp}/>}
-            {selfIndex === sourceData.length-1 && task.isPinned === false ? null : <ChevronDownButton onButtonClick={_onMoveDown}/>}
+            {selfIndex === 0 && task.isPinned === true ? null : (
+              <ChevronUpButton onButtonClick={_onMoveUp} />
+            )}
+            {selfIndex === sourceData.length - 1 &&
+            task.isPinned === false ? null : (
+              <ChevronDownButton onButtonClick={_onMoveDown} />
+            )}
           </div>
         </div>
         {isEdit ? (
@@ -139,14 +142,14 @@ export const TaskCard = ({
             <div className="flex space-x-2 ">
               <button
                 type="button"
-                className="w-1/3 bg-red-100 text-[#309a87] text-xs py-1 rounded-lg"
+                className="w-1/5 bg-red-100 text-[#309a87] text-xs py-1 rounded-lg"
                 onClick={_onDeleteTask}
               >
-                Delete
+                <TrashIcon className="w-4 m-auto" />
               </button>
               <button
                 type="button"
-                className="w-2/3 bg-[#e9f2f1] text-[#309a87] py-1 rounded-lg"
+                className="w-4/5 bg-[#e9f2f1] text-[#309a87] py-1 rounded-lg"
                 onClick={_onSaveEdit}
               >
                 Save
@@ -160,7 +163,6 @@ export const TaskCard = ({
               >
                 Cancel
               </button>
-
             </div>
           </div>
         ) : null}

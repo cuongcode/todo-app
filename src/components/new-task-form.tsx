@@ -23,6 +23,7 @@ export const NewTaskForm = ({
     tags: [],
     status: status,
     isPinned: true,
+    isSelected: false,
   };
 
   const _validate = () => {

@@ -11,6 +11,7 @@ export const STATIC_TASK_DATA = [
         tags: [],
         status: 'to-do',
         isPinned: true,
+        isSelected: false,
     },
     {
         id: 12456,
@@ -19,6 +20,7 @@ export const STATIC_TASK_DATA = [
         tags: [],
         status: 'in-progress',
         isPinned: true,
+        isSelected: false,
     },
     {
         id: 78953,
@@ -27,6 +29,7 @@ export const STATIC_TASK_DATA = [
         tags: [],
         status: 'to-do',
         isPinned: false,
+        isSelected: false,
     },
     {
         id: 45621,
@@ -35,6 +38,7 @@ export const STATIC_TASK_DATA = [
         tags: [],
         status: 'completed',
         isPinned: false,
+        isSelected: false,
     },
     {
         id: 1572,
@@ -43,6 +47,7 @@ export const STATIC_TASK_DATA = [
         tags: [],
         status: 'completed',
         isPinned: true,
+        isSelected: false,
     },
     {
         id: 75652,
@@ -51,6 +56,7 @@ export const STATIC_TASK_DATA = [
         tags: [],
         status: 'to-do',
         isPinned: false,
+        isSelected: false,
     },
     {
         id: 731583,
@@ -59,6 +65,7 @@ export const STATIC_TASK_DATA = [
         tags: [],
         status: 'to-do',
         isPinned: true,
+        isSelected: false,
     },
 
 ]

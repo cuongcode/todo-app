@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState } from "react";
-import { STATIC_TASK_DATA, STATIC_TAG_DATA } from "./index";
+import { STATIC_TASK_DATA, STATIC_TAG_DATA, Task } from "./index";
 
 export const DataContext = createContext<any>([]);
 
@@ -80,6 +80,13 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     setAllTask(updatedAllTask);
   };
 
+  const onDeleteManyTask = (deleteTaskList: any) => {
+    const deleteIndexes = deleteTaskList.map((item:any)=>allTask.indexOf(item))
+    const updatedAllTask = allTask.filter((item:any, index:any)=> !deleteIndexes.includes(index))
+    console.log(deleteTaskList)
+    setAllTask(updatedAllTask)
+  };
+
   const onAddTag = (newTag: any) => {
     setAllTag((prev: any) => [...prev, newTag]);
   };
@@ -121,6 +128,30 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const onSelect = (task: Task) => {
+    const updatedTask = { ...task, isSelected: true };
+    setAllTask((prev: any) =>
+      prev.map((item: any) => {
+        if (item.id === updatedTask.id) {
+          return updatedTask;
+        }
+        return item;
+      })
+    );
+  };
+
+  const onUnselect = (task: Task) => {
+    const updatedTask = { ...task, isSelected: false };
+    setAllTask((prev: any) =>
+      prev.map((item: any) => {
+        if (item.id === updatedTask.id) {
+          return updatedTask;
+        }
+        return item;
+      })
+    );
+  };
+
   const context = {
     todoTask,
     inProgressTask,
@@ -133,10 +164,13 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     onPinUnpin,
     onSwitchTaskPosition,
     onDeleteTask,
+    onDeleteManyTask,
     onAddTag,
     onDeleteTag,
     onTag,
     onUntag,
+    onSelect,
+    onUnselect,
   };
 
   return (

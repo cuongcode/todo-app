@@ -7,4 +7,5 @@ export interface Task {
     tags: Tag[],
     status: string,
     isPinned: boolean,
+    isSelected: boolean,
 }

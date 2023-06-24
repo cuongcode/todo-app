@@ -13,8 +13,8 @@ export const AddTaskButton = ({status}:{status:any}) => {
 
   return (
     <>
-      <button onClick={()=>setIsAdd(true)} className="bg-[#e9f2f1] rounded-lg text-[#309a87] p-3">
-        <PlusIcon className="w-4 m-auto" />
+      <button onClick={()=>setIsAdd(true)} className="flex items-center justify-center bg-[#e9f2f1] rounded-lg text-[#309a87] p-3 h-9">
+        <PlusIcon className="w-4" />
       </button>
       {isAdd ? <NewTaskForm status={status} onCancel={_onCancel}/> : null}
     </>

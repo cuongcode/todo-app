@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import {
   PencilMultiEditButton,
   AddTaskButton,
   TaskCard,
   FilterButton,
+  MultiEditButton,
 } from "./index";
+
+import {STATUS_TITLE} from '../utils/index'
+
+import { DataContext } from "../utils/data-context";
 
 export const StatusColumn = ({
   status,
@@ -14,11 +19,7 @@ export const StatusColumn = ({
   status: string;
   data: any;
 }) => {
-  const STATUS_TITLE = {
-    "to-do": "To do",
-    "in-progress": "In progress",
-    completed: "Completed",
-  };
+  const {onUnselect} = useContext(DataContext)
   const [isShowSelectBoxes, setisShowSelectBoxes] = useState(false);
 
   const pinData = data.filter((item: any) => item.isPinned === true);
@@ -26,6 +27,9 @@ export const StatusColumn = ({
 
   const _onShowSelectBox = () => {
     setisShowSelectBoxes(!isShowSelectBoxes);
+    for (const task of data) {
+      onUnselect(task)
+    }
   };
   return (
     <div className="flex flex-col w-full md:w-1/3 bg-[#f5f9f9] rounded-xl p-3 space-y-3">
@@ -42,7 +46,11 @@ export const StatusColumn = ({
         </div>
       </div>
 
-      <AddTaskButton status={status} />
+      {isShowSelectBoxes ? (
+        <MultiEditButton status={status} taskList={data}/>
+      ) : (
+        <AddTaskButton status={status} />
+      )}
 
       <div className="flex flex-col space-y-3">
         {pinData.map((item: any, index: any) => (

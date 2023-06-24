@@ -1,4 +1,4 @@
-export const SelectButton = ({
+export const SelectBox = ({
   isSelected,
   onSelect,
 }: {
