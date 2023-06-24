@@ -14,7 +14,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
   const completedTask = allTask.filter(
     (item: any) => item.status === "completed"
   );
-  const usedTags = allTask.map((item:any) => [...item.tags]).flat()
+  const usedTags = allTask.map((item: any) => [...item.tags]).flat();
 
   const onAddTask = (newTask: any) => {
     setAllTask((prev: any) => [newTask, ...prev]);
@@ -73,16 +73,25 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const onDeleteTask = (task: any) => {
+    const taskIndex = allTask.findIndex((item: any) => item.id === task.id);
+    const updatedAllTask = [...allTask];
+    updatedAllTask.splice(taskIndex, 1);
+    setAllTask(updatedAllTask);
+  };
+
   const onAddTag = (newTag: any) => {
     setAllTag((prev: any) => [...prev, newTag]);
   };
 
-  const onDeleteTag = (deletedTag:any) => {
-    const deletedTagIndex = allTag.findIndex((item:any)=>item.id === deletedTag.id)
-    const updatedAllTag = [...allTag]
-    updatedAllTag.splice(deletedTagIndex,1)
-    setAllTag(updatedAllTag)
-  }
+  const onDeleteTag = (deletedTag: any) => {
+    const deletedTagIndex = allTag.findIndex(
+      (item: any) => item.id === deletedTag.id
+    );
+    const updatedAllTag = [...allTag];
+    updatedAllTag.splice(deletedTagIndex, 1);
+    setAllTag(updatedAllTag);
+  };
 
   const onTag = (task: any, tag: any) => {
     const updatedTags = [...task.tags, tag];
@@ -97,11 +106,11 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const onUntag = (task:any, tag:any) => {
-    const tagIndex = task.tags.findIndex((item:any)=> item.id === tag.id)
-    const updatedTags = [...task.tags]
-    updatedTags.splice(tagIndex,1)
-    const updatedTask = {...task, tags: updatedTags}
+  const onUntag = (task: any, tag: any) => {
+    const tagIndex = task.tags.findIndex((item: any) => item.id === tag.id);
+    const updatedTags = [...task.tags];
+    updatedTags.splice(tagIndex, 1);
+    const updatedTask = { ...task, tags: updatedTags };
     setAllTask((prev: any) =>
       prev.map((item: any) => {
         if (item.id === updatedTask.id) {
@@ -110,7 +119,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
         return item;
       })
     );
-  }
+  };
 
   const context = {
     todoTask,
@@ -123,6 +132,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     onEditTask,
     onPinUnpin,
     onSwitchTaskPosition,
+    onDeleteTask,
     onAddTag,
     onDeleteTag,
     onTag,

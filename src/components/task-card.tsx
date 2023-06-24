@@ -23,7 +23,7 @@ export const TaskCard = ({
   selfIndex: any;
   sourceData:any
 }) => {
-  const { onEditTask, onPinUnpin, onSwitchTaskPosition } = useContext(DataContext);
+  const {usedTags, onEditTask, onPinUnpin, onSwitchTaskPosition, onDeleteTask, onDeleteTag } = useContext(DataContext);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
   const [isSelected, setIsSelected] = useState(false);
@@ -54,6 +54,17 @@ export const TaskCard = ({
     onEditTask(task, title, description)
     _onCancelEdit()
   };
+
+  const _onDeleteTask = () => {
+    if (task.tags.length > 0) {
+      for (const tag of task.tags) {
+        if (usedTags.filter((item:any)=>item.id===tag.id).length === 1) {
+          onDeleteTag(tag)
+        }
+      }
+    }
+    onDeleteTask(task)
+  }
 
   const _onMoveUp = () => {
     if (task.isPinned === false && selfIndex === 0) {
@@ -124,21 +135,33 @@ export const TaskCard = ({
         <TagSection task={task} />
 
         {isEdit ? (
-          <div className="flex space-x-2 text-sm">
-            <button
-              type="button"
-              className="w-1/2 bg-[#e9f2f1] text-[#309a87] py-1 rounded-lg"
-              onClick={_onCancelEdit}
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              className="w-1/2 bg-[#e9f2f1] text-[#309a87] py-1 rounded-lg"
-              onClick={_onSaveEdit}
-            >
-              Save
-            </button>
+          <div className="flex flex-col space-y-2 text-sm">
+            <div className="flex space-x-2 ">
+              <button
+                type="button"
+                className="w-1/3 bg-red-100 text-[#309a87] text-xs py-1 rounded-lg"
+                onClick={_onDeleteTask}
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                className="w-2/3 bg-[#e9f2f1] text-[#309a87] py-1 rounded-lg"
+                onClick={_onSaveEdit}
+              >
+                Save
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                className="w-full bg-[#e9f2f1] text-[#309a87] py-1 rounded-lg"
+                onClick={_onCancelEdit}
+              >
+                Cancel
+              </button>
+
+            </div>
           </div>
         ) : null}
       </div>
