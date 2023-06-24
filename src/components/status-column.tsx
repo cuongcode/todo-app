@@ -1,8 +1,19 @@
 import { useState } from "react";
 
-import { PencilMultiEditButton, AddTaskButton, TaskCard } from "./index";
+import {
+  PencilMultiEditButton,
+  AddTaskButton,
+  TaskCard,
+  FilterButton,
+} from "./index";
 
-export const StatusColumn = ({ status, data }: { status: string; data: any }) => {
+export const StatusColumn = ({
+  status,
+  data,
+}: {
+  status: string;
+  data: any;
+}) => {
   const STATUS_TITLE = {
     "to-do": "To do",
     "in-progress": "In progress",
@@ -10,8 +21,8 @@ export const StatusColumn = ({ status, data }: { status: string; data: any }) =>
   };
   const [isShowSelectBoxes, setisShowSelectBoxes] = useState(false);
 
-  const pinData = data.filter((item:any) => item.isPinned === true)
-  const unpinData = data.filter((item:any) => item.isPinned === false)
+  const pinData = data.filter((item: any) => item.isPinned === true);
+  const unpinData = data.filter((item: any) => item.isPinned === false);
 
   const _onShowSelectBox = () => {
     setisShowSelectBoxes(!isShowSelectBoxes);
@@ -25,7 +36,10 @@ export const StatusColumn = ({ status, data }: { status: string; data: any }) =>
             {data.length}
           </div>
         </div>
-        <PencilMultiEditButton onShowSelectBox={_onShowSelectBox} />
+        <div className="flex items-center space-x-2">
+          <PencilMultiEditButton onShowSelectBox={_onShowSelectBox} />
+          <FilterButton />
+        </div>
       </div>
 
       <AddTaskButton status={status} />
@@ -33,12 +47,22 @@ export const StatusColumn = ({ status, data }: { status: string; data: any }) =>
       <div className="flex flex-col space-y-3">
         {pinData.map((item: any, index: any) => (
           <div key={item.id}>
-            <TaskCard task={item} isShowSelectBoxes={isShowSelectBoxes} selfIndex={index} sourceData={pinData}/>
+            <TaskCard
+              task={item}
+              isShowSelectBoxes={isShowSelectBoxes}
+              selfIndex={index}
+              sourceData={pinData}
+            />
           </div>
         ))}
         {unpinData.map((item: any, index: any) => (
           <div key={item.id}>
-            <TaskCard task={item} isShowSelectBoxes={isShowSelectBoxes} selfIndex={index} sourceData={unpinData}/>
+            <TaskCard
+              task={item}
+              isShowSelectBoxes={isShowSelectBoxes}
+              selfIndex={index}
+              sourceData={unpinData}
+            />
           </div>
         ))}
       </div>
