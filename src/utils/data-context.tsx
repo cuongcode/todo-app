@@ -73,17 +73,9 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const onDeleteTask = (task: any) => {
-    const taskIndex = allTask.findIndex((item: any) => item.id === task.id);
-    const updatedAllTask = [...allTask];
-    updatedAllTask.splice(taskIndex, 1);
-    setAllTask(updatedAllTask);
-  };
-
   const onDeleteManyTask = (deleteTaskList: any) => {
     const deleteIndexes = deleteTaskList.map((item:any)=>allTask.indexOf(item))
     const updatedAllTask = allTask.filter((item:any, index:any)=> !deleteIndexes.includes(index))
-    console.log(deleteTaskList)
     setAllTask(updatedAllTask)
   };
 
@@ -91,13 +83,10 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     setAllTag((prev: any) => [...prev, newTag]);
   };
 
-  const onDeleteTag = (deletedTag: any) => {
-    const deletedTagIndex = allTag.findIndex(
-      (item: any) => item.id === deletedTag.id
-    );
-    const updatedAllTag = [...allTag];
-    updatedAllTag.splice(deletedTagIndex, 1);
-    setAllTag(updatedAllTag);
+  const onDeleteManyTag = (deleteTagList: any) => {
+    const deleteIndexes = deleteTagList.map((item:any)=>allTag.indexOf(item))
+    const updatedAllTag = allTag.filter((item:any, index:any)=> !deleteIndexes.includes(index))
+    setAllTag(updatedAllTag)
   };
 
   const onTag = (task: any, tag: any) => {
@@ -129,7 +118,7 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const onSelect = (task: Task) => {
-    const updatedTask = { ...task, isSelected: true };
+    const updatedTask = { ...task, isSelected: !task.isSelected };
     setAllTask((prev: any) =>
       prev.map((item: any) => {
         if (item.id === updatedTask.id) {
@@ -163,10 +152,9 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     onEditTask,
     onPinUnpin,
     onSwitchTaskPosition,
-    onDeleteTask,
     onDeleteManyTask,
     onAddTag,
-    onDeleteTag,
+    onDeleteManyTag,
     onTag,
     onUntag,
     onSelect,

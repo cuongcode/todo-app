@@ -12,6 +12,7 @@ import {
 } from "./index";
 import { DataContext } from "../utils/data-context";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { countItemInArray } from "../utils/base";
 
 export const TaskCard = ({
   task,
@@ -22,22 +23,32 @@ export const TaskCard = ({
   task: any;
   isShowSelectBoxes: any;
   selfIndex: any;
-  sourceData:any
+  sourceData: any;
 }) => {
-  const {usedTags, onEditTask, onPinUnpin, onSwitchTaskPosition, onDeleteTask, onDeleteTag, onSelect } = useContext(DataContext);
+  const {
+    usedTags,
+    onEditTask,
+    onPinUnpin,
+    onSwitchTaskPosition,
+    onDeleteManyTask,
+    onDeleteManyTag,
+    onSelect,
+  } = useContext(DataContext);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
   const [isEdit, setIsEdit] = useState(false);
 
-  const upperTask = sourceData[selfIndex-1]
-  const lowerTask = sourceData[selfIndex+1]
+  const usedTagIds = usedTags.map((item: any) => item.id);
+
+  const upperTask = sourceData[selfIndex - 1];
+  const lowerTask = sourceData[selfIndex + 1];
 
   const _onSelect = () => {
-    onSelect(task)
+    onSelect(task);
   };
 
   const _onPinUnpin = () => {
-    onPinUnpin(task)
+    onPinUnpin(task);
   };
 
   const _onEdit = () => {
@@ -51,36 +62,33 @@ export const TaskCard = ({
   };
 
   const _onSaveEdit = () => {
-    onEditTask(task, title, description)
-    _onCancelEdit()
+    onEditTask(task, title, description);
+    _onCancelEdit();
   };
 
   const _onDeleteTask = () => {
-    if (task.tags.length > 0) {
-      for (const tag of task.tags) {
-        if (usedTags.filter((item:any)=>item.id===tag.id).length === 1) {
-          onDeleteTag(tag)
-        }
-      }
-    }
-    onDeleteTask(task)
-  }
+    const deleteTagList = task.tags.filter(
+      (item: any) => countItemInArray(item.id, usedTagIds) === 1
+    );
+    onDeleteManyTag(deleteTagList);
+    onDeleteManyTask([task]);
+  };
 
   const _onMoveUp = () => {
     if (task.isPinned === false && selfIndex === 0) {
-      _onPinUnpin()
-      return
+      _onPinUnpin();
+      return;
     }
-    onSwitchTaskPosition(task, upperTask)
-  }
+    onSwitchTaskPosition(task, upperTask);
+  };
 
   const _onMoveDown = () => {
-    if (task.isPinned === true && selfIndex === sourceData.length-1) {
-      _onPinUnpin()
-      return
+    if (task.isPinned === true && selfIndex === sourceData.length - 1) {
+      _onPinUnpin();
+      return;
     }
-    onSwitchTaskPosition(task, lowerTask)
-  }
+    onSwitchTaskPosition(task, lowerTask);
+  };
 
   return (
     <>

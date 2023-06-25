@@ -1,6 +1,7 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
 import { DataContext } from "../utils/data-context";
+import { countItemInArray } from "../utils/base";
 
 export const MultiEditButton = ({
   status,
@@ -9,12 +10,30 @@ export const MultiEditButton = ({
   status: any;
   taskList: any;
 }) => {
-  const { onDeleteManyTask } = useContext(DataContext);
+  const { usedTags, allTag, onDeleteManyTask, onDeleteManyTag } =
+    useContext(DataContext);
+  const usedTagIds = usedTags.map((item: any) => item.id);
 
   const _onDeleteManyTasks = () => {
     const deleteTaskList = taskList.filter(
       (item: any) => item.isSelected === true
     );
+
+    const tagList = deleteTaskList.map((item: any) => [...item.tags]).flat();
+    const tagIds = tagList.map((item: any) => item.id);
+    const uniqueTagIds = Array.from(new Set(tagIds.map((item: any) => item)));
+    const countUniqueTags = uniqueTagIds.map((item: any) =>
+      countItemInArray(item, tagIds)
+    );
+    const deleteTagIds = uniqueTagIds.filter(
+      (item: any, index) =>
+        countItemInArray(item, usedTagIds) === countUniqueTags[index]
+    );
+    const deleteTagList = allTag.filter((item: any, index: any) =>
+      deleteTagIds.includes(item.id)
+    );
+    onDeleteManyTag(deleteTagList);
+
     onDeleteManyTask(deleteTaskList);
   };
 
